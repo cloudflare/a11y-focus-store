@@ -2,8 +2,8 @@
 
 var storedFocusElement;
 
-exports.storeFocus = function() {
-  storedFocusElement = document.activeElement;
+exports.storeFocus = function(element) {
+  storedFocusElement = element || document.activeElement;
 };
 
 exports.clearStoredFocus = function() {
