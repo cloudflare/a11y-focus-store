@@ -7,13 +7,16 @@ describe('focusStore', function() {
   beforeEach(function() {
     this.button1 = document.createElement('button');
     this.button2 = document.createElement('button');
+    this.button3 = document.createElement('button');
     document.body.appendChild(this.button1);
     document.body.appendChild(this.button2);
+    document.body.appendChild(this.button3);
   });
 
   afterEach(function() {
     this.button1.remove();
     this.button2.remove();
+    this.button3.remove();
   });
 
   it('should store and restore focus', function() {
@@ -40,5 +43,13 @@ describe('focusStore', function() {
     expect(function() {
       focusStore.restoreFocus();
     }).not.to.throw();
+  });
+
+  it('should accept a custom element to focus', function() {
+    this.button1.focus();
+    focusStore.storeFocus(this.button3);
+    this.button2.focus();
+    focusStore.restoreFocus();
+    expect(document.activeElement).to.equal(this.button3);
   });
 });
